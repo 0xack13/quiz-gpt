@@ -9,3 +9,7 @@ Add your openai API key to .env.local
 ## Screenshot of app
 
 ![Example Image](quiz-gpt.png)
+
+## Live version
+
+https://urchin-app-oib2i.ondigitalocean.app/
