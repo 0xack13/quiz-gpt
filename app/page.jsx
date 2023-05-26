@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, useEffect, useState } from "react";
+import React, { useState } from "react";
 import QuizComponent from "../components/QuizComponent";
 
 const Home = () => {
@@ -8,6 +8,8 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [gptResponse, setGptResponse] = useState(undefined);
   const [gptResponseParsed, setGptResponseParsed] = useState(undefined);
+  const [showAnswers, setShowAnswers] = useState(false);
+  const [resetSelection, setResetSelection] = useState(true);
 
   const queryGPT = () => {
     setLoading(true);
@@ -31,14 +33,14 @@ const Home = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     queryGPT();
+    setShowAnswers(false);
   };
 
   return (
     <div>
       <div className="text-[24px] lg:text-[36px] text-center text-white font-extrabold lg:my-4;">
-        GPT QUIZ
+        QUIZ GPT
       </div>
       <div className="flex items-center justify-center mt-5">
         <form onSubmit={handleSubmit} className="space-y-6 w-[70%] h-[20%]">
@@ -53,11 +55,17 @@ const Home = () => {
             className="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             type="submit"
           >
-            Submit
+            Generate Quiz
           </button>
         </form>
       </div>
-      <div className="">{loading ? <>Loading...</> : <div></div>}</div>
+      <div className="w-full text-center text-yellow-200 m-3">
+        {loading ? (
+          <>Loading... Can take up to 30s to generate quiz.</>
+        ) : (
+          <div></div>
+        )}
+      </div>
       <div className="m-6">
         {" "}
         {gptResponseParsed ? (
